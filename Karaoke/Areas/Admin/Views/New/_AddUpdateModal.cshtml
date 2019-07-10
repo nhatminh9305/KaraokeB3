@@ -1,0 +1,66 @@
+﻿@model B3.Models.NewModel
+<!-- Modal -->
+@Html.AntiForgeryToken()
+<div class="modal fade modal-full" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Cập Nhật Tin Tức</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmSaveData" name="data" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" id="hidID" value="0" />
+                        <label asp-for="Title"> Tiêu Đề</label>
+                        <span class="required">*</span>
+                        <input asp-for="Title" class="form-control" id="Title">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtImage">Image</label>
+                        <span class="required" aria-required="true">*</span>
+                        <input type="file" accept="image/*" class="form-control" name="txtImage" id="txtImage" onchange="configController.loadFile(event);" data-val=" true">
+                        <img id="output" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtType">Thể Loại</label>
+                        <span class="required" aria-required="true">*</span>
+                        <select class="form-control" id="txtType" data-val="true">
+                            <option value="0">Default</option>
+                            <option value="1">Tin Tức</option>
+                            <option value="2">Tuyển Dụng</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtStatus">Trạng Thái &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+                        <input type="checkbox" class="make-switch form-control" checked data-on-color="success" data-off-color="warning" name="txtStatus" id="txtStatus" data-val="true">
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPublishDate">Public</label>
+                        <input class="form-control" type="datetime-local" name="txtPublishDate" id="txtPublishDate" data-val="true">
+                        <span asp-validation-for="PublishDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDescription">Nội Dung</label>
+                        <div name="summernote" id="summernote_1"> </div>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn green" id="btnSave">Save</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+   
