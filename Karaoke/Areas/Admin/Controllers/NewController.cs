@@ -77,7 +77,7 @@ namespace Karaoke.Areas.Admin.Controllers
             }
             try
             {
-                if(News.ImageUpload != null)
+                if (News.ImageUpload != null)
                 {
                     string extension = Path.GetExtension(News.ImageUpload.FileName);
                     string fileName = DateTime.Now.ToString("yymmssfff") + extension;
@@ -101,9 +101,9 @@ namespace Karaoke.Areas.Admin.Controllers
                         message = e.Message;
                     }
                 }
-             
+
             }
-            catch( Exception e)
+            catch (Exception e)
             {
                 status = false;
                 message = e.Message;
@@ -113,6 +113,28 @@ namespace Karaoke.Areas.Admin.Controllers
                 status = status,
                 message = message
             });
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var contact = _context.News.Find(id);
+            _context.News.Remove(contact);
+            try
+            {
+                _context.SaveChanges();
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = ex.Message
+                });
+            }
         }
     }
 }
